@@ -3,5 +3,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql//localhost:3307/blog?serverTimezone=Asia/Seoul
     username: gyumani
-    password: MY#gyumin127@lo
+    password: XXXXXXXXXXXXXX
 

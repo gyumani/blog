@@ -6,6 +6,16 @@ import org.springframework.web.bind.annotation.*;
 public class HttpControllerTest {
 
     private String message;
+    private final String TAG="HttpControllerTest: ";
+
+    @GetMapping("/http/lombok")
+    public String lombokTest() {
+        Member m=Member.builder().username("jkm1227").password("12345").email("email").build();
+        System.out.println(TAG+"getter: "+m.getId());
+        m.setId(5000);
+        System.out.println(TAG+"setter: "+m.getId());
+        return "lombok test 완료";
+    }
 
     @GetMapping("/http/get")
     public String getTest(Member m){

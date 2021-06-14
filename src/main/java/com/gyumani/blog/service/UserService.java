@@ -13,15 +13,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public Integer joinMember(User user){
-        try{
-            userRepository.save(user);
-            return 1;
-        }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("User Service: joinMember(): "+e.getMessage());
-        }
-
-        return -1;
+    public void joinMember(User user){
+        userRepository.save(user);
     }
 }

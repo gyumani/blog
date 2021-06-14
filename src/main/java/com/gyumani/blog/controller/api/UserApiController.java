@@ -24,7 +24,7 @@ public class UserApiController {
         }else{
             user.setRole(RoleType.USER);
         }
-        int result=userService.joinMember(user);
-        return new ResponseDto<Integer>(HttpStatus.OK,result);
+        userService.joinMember(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 }

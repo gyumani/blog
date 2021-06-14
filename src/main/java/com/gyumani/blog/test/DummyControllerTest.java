@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -20,6 +18,34 @@ public class DummyControllerTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id){
+        try{
+
+        }catch (IllegalArgumentException e){
+            return "Delete Fail: Caused by not Exist 'id' in DataBase";
+        }
+        userRepository.deleteById(id);
+        return "삭제 되었습니다. id: "+id;
+    }
+
+    @Transactional
+    @PutMapping("/dummy/user/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User requestUser){
+        System.out.println("id: "+id);
+        System.out.println("password: "+requestUser.getPassword());
+        System.out.println("email: "+requestUser.getEmail());
+
+        User user=userRepository.findById(id).orElseThrow(()->{
+            return new IllegalArgumentException("수정에 실패하였습니다.");
+        });
+        user.setPassword(requestUser.getPassword());
+        user.setEmail(requestUser.getEmail());
+        //userRepository.save(user);
+
+        return null;
+    }
 
     @GetMapping("/dummy/users")
     public List<User> list(){

@@ -22,11 +22,10 @@ public class DummyControllerTest {
     @DeleteMapping("/dummy/user/{id}")
     public String delete(@PathVariable int id){
         try{
-
-        }catch (IllegalArgumentException e){
+            userRepository.deleteById(id);
+        }catch (Exception e){
             return "Delete Fail: Caused by not Exist 'id' in DataBase";
         }
-        userRepository.deleteById(id);
         return "삭제 되었습니다. id: "+id;
     }
 

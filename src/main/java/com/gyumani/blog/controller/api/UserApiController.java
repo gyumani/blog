@@ -19,11 +19,7 @@ public class UserApiController {
     @PostMapping("/api/user")
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("UserApiController: save 호출됨");
-        if(user.getUsername().equals("admin")){
-            user.setRole(RoleType.ADMIN);
-        }else{
-            user.setRole(RoleType.USER);
-        }
+        user.setRole(RoleType.USER);
         userService.joinMember(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }

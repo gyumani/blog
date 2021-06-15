@@ -1,6 +1,6 @@
 package com.gyumani.blog.handler;
 
-import com.gyumani.blog.ResponseDto;
+import com.gyumani.blog.dto.ResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

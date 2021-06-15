@@ -1,6 +1,6 @@
 package com.gyumani.blog.controller.api;
 
-import com.gyumani.blog.ResponseDto;
+import com.gyumani.blog.dto.ResponseDto;
 import com.gyumani.blog.model.RoleType;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.service.UserService;
@@ -17,7 +17,7 @@ public class UserApiController {
     private UserService userService;
 
 
-    @PostMapping("/api/user")
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("UserApiController: save 호출됨");
         user.setRole(RoleType.USER);

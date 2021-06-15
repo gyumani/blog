@@ -1,4 +1,4 @@
-package com.gyumani.blog;
+package com.gyumani.blog.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

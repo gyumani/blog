@@ -5,7 +5,7 @@
   Time: 오후 4:01
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authorize access="isAuthenticated()">
@@ -35,8 +35,8 @@
         <c:choose>
             <c:when test="${empty principal }">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/loginForm">로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/joinForm">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/loginForm">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
                 </ul>
             </c:when>
             <c:otherwise>

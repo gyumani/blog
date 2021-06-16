@@ -4,6 +4,7 @@ import com.gyumani.blog.model.RoleType;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -52,9 +53,10 @@ public class DummyControllerTest {
     }
 
     @GetMapping("/dummy/user")
-    public List<User> pageList(@PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC) Pageable pageable){
-        List<User> users= userRepository.findAll(pageable).getContent();
-        return users;
+    public Page<User> pageList(@PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC) Pageable pageable){
+        Page<User> pagingUser= userRepository.findAll(pageable);
+  /*      List<User> users= userRepository.findAll(pageable).getContent();*/
+        return pagingUser;
     }
 
 

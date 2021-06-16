@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -28,7 +27,6 @@ public class Board {
     @Lob
     private String content;
 
-    @ColumnDefault("'0'")
     private int count;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -38,6 +36,6 @@ public class Board {
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Reply> reply;
 
-    @CreatedDate
+    @CreationTimestamp
     private Timestamp createDate;
 }

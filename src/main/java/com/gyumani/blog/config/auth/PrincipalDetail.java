@@ -1,12 +1,14 @@
 package com.gyumani.blog.config.auth;
 
 import com.gyumani.blog.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Data
 public class PrincipalDetail implements UserDetails {
     private User user;
 

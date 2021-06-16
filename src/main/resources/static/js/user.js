@@ -12,7 +12,7 @@ let index={
         };
         $.ajax({
             type:"POST",
-            url:"/api/user",
+            url:"/auth/joinProc",
             data:JSON.stringify(data),
             contentType:"application/json; charset=utf-8",
             dataType:"json"

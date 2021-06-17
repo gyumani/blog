@@ -26,9 +26,7 @@
                 <li class="page-item"><a class="page-link" href="?page=${boards.number-1}">Previous</a></li>
             </c:otherwise>
         </c:choose>
-<%--        <c:forEach var="board" items="${boards.pageable}">
-            <li class="page-item"><a class="page-link" href="?page=${board.pageNumber+1}">${board.pageNumber+1}</a></li>
-        </c:forEach>  언젠간 하고말테다--%>
+
         <c:choose>
             <c:when test="${boards.last}">
                 <li class="page-item disabled"><a class="page-link" href="?page=${boards.number+1}">Next</a></li>

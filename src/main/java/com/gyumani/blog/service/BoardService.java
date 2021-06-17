@@ -23,10 +23,12 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional(readOnly = true)
     public Page<Board> listTxt(Pageable pageable){
         return boardRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
     public Board viewTxt(int id){
         return boardRepository.findById(id)
                 .orElseThrow(()->{
@@ -34,4 +36,8 @@ public class BoardService {
                 });
     }
 
+    @Transactional
+    public void deleteTxt(int id) {
+        boardRepository.deleteById(id);
+    }
 }

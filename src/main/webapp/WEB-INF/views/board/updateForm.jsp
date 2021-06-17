@@ -2,17 +2,18 @@
          pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
 <div class="container">
+    <input type="hidden" id="id" value="${board.id}"/>
     <form>
         <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Enter title" id="title">
+            <input value="${board.title}" type="text" name="title" class="form-control" placeholder="Enter title" id="title">
         </div>
 
         <div class="form-group">
-            <textarea class="form-control summernote" rows="5" id="content"></textarea>
+            <textarea class="form-control summernote" rows="5" id="content">${board.content}</textarea>
         </div>
     </form>
 
-    <button  id="btn-save" class="btn btn-primary">글쓰기완료</button>
+    <button  id="btn-update" class="btn btn-primary">수정하기</button>
 </div>
 
 <script>

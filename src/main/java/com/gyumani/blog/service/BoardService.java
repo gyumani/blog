@@ -40,4 +40,14 @@ public class BoardService {
     public void deleteTxt(int id) {
         boardRepository.deleteById(id);
     }
+
+    @Transactional
+    public void updateTxt(int id, Board requsetBoard){
+        Board board=boardRepository.findById(id)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("글 수정 실패: 해당 아이디를 찾을 수 없습니다.");
+                });
+        board.setTitle(requsetBoard.getTitle());
+        board.setContent(requsetBoard.getContent());
+    }
 }

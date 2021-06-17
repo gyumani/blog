@@ -38,8 +38,7 @@ public class UserApiController {
     @PutMapping("/user")
     public ResponseDto<Integer> update(@RequestBody User user){
         userService.updateMember(user);
-        String encPassword=encoder.encode(user.getPassword());
-        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),encPassword));
+        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return  new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }

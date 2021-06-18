@@ -50,4 +50,5 @@ public class BoardService {
         board.setTitle(requsetBoard.getTitle());
         board.setContent(requsetBoard.getContent());
     }
+
 }

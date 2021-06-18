@@ -18,6 +18,15 @@ public class UserService {
     private BCryptPasswordEncoder encoder;
 
 
+    @Transactional(readOnly = true)
+    public User findMember(String username){
+        User user=userRepository.findByUsername(username).orElseGet(()->{
+            return new User();
+        });
+        return user;
+
+    }
+
     @Transactional
     public void joinMember(User user){
         String rawPassword=user.getPassword();
@@ -32,10 +41,15 @@ public class UserService {
         User persistance=userRepository.findById(user.getId()).orElseThrow(()->{
             return new IllegalArgumentException("해당 회원을 찾을 수 없습니다.");
         });
-        String rawPassword=user.getPassword();
-        String encPassword= encoder.encode(rawPassword);
-        persistance.setPassword(encPassword);
-        persistance.setEmail(user.getEmail());
+        
+        //Vaildate 체크 =>oauth 필드에 값이 없으면 수정가능
+        if(persistance.getOauth()==null || persistance.getOauth().equals("")){
+            String rawPassword=user.getPassword();
+            String encPassword= encoder.encode(rawPassword);
+            persistance.setPassword(encPassword);
+            persistance.setEmail(user.getEmail());
+        }
+      
 
     }
 

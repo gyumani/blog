@@ -30,3 +30,6 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+gyumani:
+  key: GYUMANI1234

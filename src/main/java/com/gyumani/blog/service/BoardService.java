@@ -1,8 +1,10 @@
 package com.gyumani.blog.service;
 
 import com.gyumani.blog.model.Board;
+import com.gyumani.blog.model.Reply;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.repository.BoardRepository;
+import com.gyumani.blog.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,10 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
+
 
     @Transactional
     public void writeTxt(Board board, User user){
@@ -50,5 +56,20 @@ public class BoardService {
         board.setTitle(requsetBoard.getTitle());
         board.setContent(requsetBoard.getContent());
     }
+
+
+    @Transactional
+    public void writeReply(User user,int boardId ,Reply requestReply){
+        Board board=boardRepository.findById(boardId)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("댓글 쓰기 실패: 게시글 id를 찾을 수 없습니다.");
+                });
+        requestReply.setUser(user);
+        requestReply.setBoard(board);
+
+        replyRepository.save(requestReply);
+
+    }
+
 
 }

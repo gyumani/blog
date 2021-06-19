@@ -35,7 +35,8 @@ public class Board {
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"board","user"})
+    @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
     private List<Reply> replys;
 
     @CreationTimestamp

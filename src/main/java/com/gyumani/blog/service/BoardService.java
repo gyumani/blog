@@ -68,5 +68,10 @@ public class BoardService {
 
     }
 
+    @Transactional
+    public void deleteReply(int id){
+        replyRepository.deleteById(id);
+    }
+
 
 }

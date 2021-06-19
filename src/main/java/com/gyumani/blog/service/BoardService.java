@@ -2,7 +2,6 @@ package com.gyumani.blog.service;
 
 import com.gyumani.blog.dto.ReplySaveRequestDto;
 import com.gyumani.blog.model.Board;
-import com.gyumani.blog.model.Reply;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.repository.BoardRepository;
 import com.gyumani.blog.repository.ReplyRepository;
@@ -65,22 +64,9 @@ public class BoardService {
 
     @Transactional
     public void writeReply(ReplySaveRequestDto replySaveRequestDto){
-        User user=userRepository.findById(replySaveRequestDto.getUserId())
-                .orElseThrow(()->{
-                    return new IllegalArgumentException("댓글 쓰기 실패: 유저 id를 찾을 수 없습니다.");
-                });
-        Board board=boardRepository.findById(replySaveRequestDto.getBoardId())
-                .orElseThrow(()->{
-                    return new IllegalArgumentException("댓글 쓰기 실패: 게시글 id를 찾을 수 없습니다.");
-                });
-        Reply reply=Reply.builder()
-                .user(user)
-                .board(board)
-                .content(replySaveRequestDto.getContent())
-                .build();
+        int result=replyRepository.mSave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(),replySaveRequestDto.getContent());
+        System.out.println("댓글 연동 결과:"+result);
 
-
-        replyRepository.save(reply);
 
     }
 

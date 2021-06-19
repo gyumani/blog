@@ -1,9 +1,6 @@
 package com.gyumani.blog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -33,4 +30,14 @@ public class Reply {
     @CreationTimestamp
     private Timestamp createDate;
 
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", board=" + board +
+                ", user=" + user +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

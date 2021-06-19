@@ -1,9 +1,9 @@
 package com.gyumani.blog.controller.api;
 
 import com.gyumani.blog.config.auth.PrincipalDetail;
+import com.gyumani.blog.dto.ReplySaveRequestDto;
 import com.gyumani.blog.dto.ResponseDto;
 import com.gyumani.blog.model.Board;
-import com.gyumani.blog.model.Reply;
 import com.gyumani.blog.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,10 +37,10 @@ public class BoardApiController {
     //데이터를 받을때 컨트롤러에서 dto를 만들어서 받는게 좋다.
     //dto를 사용하지 않는 이유는!!
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail princiapl){
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto){
 
 
-        boardService.writeReply(princiapl.getUser(), boardId, reply);
+        boardService.writeReply(replySaveRequestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 

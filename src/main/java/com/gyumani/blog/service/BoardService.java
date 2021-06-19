@@ -1,10 +1,12 @@
 package com.gyumani.blog.service;
 
+import com.gyumani.blog.dto.ReplySaveRequestDto;
 import com.gyumani.blog.model.Board;
 import com.gyumani.blog.model.Reply;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.repository.BoardRepository;
 import com.gyumani.blog.repository.ReplyRepository;
+import com.gyumani.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BoardService {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private BoardRepository boardRepository;
@@ -59,15 +64,23 @@ public class BoardService {
 
 
     @Transactional
-    public void writeReply(User user,int boardId ,Reply requestReply){
-        Board board=boardRepository.findById(boardId)
+    public void writeReply(ReplySaveRequestDto replySaveRequestDto){
+        User user=userRepository.findById(replySaveRequestDto.getUserId())
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("댓글 쓰기 실패: 유저 id를 찾을 수 없습니다.");
+                });
+        Board board=boardRepository.findById(replySaveRequestDto.getBoardId())
                 .orElseThrow(()->{
                     return new IllegalArgumentException("댓글 쓰기 실패: 게시글 id를 찾을 수 없습니다.");
                 });
-        requestReply.setUser(user);
-        requestReply.setBoard(board);
+        Reply reply=Reply.builder()
+                .user(user)
+                .board(board)
+                .content(replySaveRequestDto.getContent())
+                .build();
 
-        replyRepository.save(requestReply);
+
+        replyRepository.save(reply);
 
     }
 

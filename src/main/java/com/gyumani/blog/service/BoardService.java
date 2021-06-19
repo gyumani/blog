@@ -5,8 +5,6 @@ import com.gyumani.blog.model.Board;
 import com.gyumani.blog.model.User;
 import com.gyumani.blog.repository.BoardRepository;
 import com.gyumani.blog.repository.ReplyRepository;
-import com.gyumani.blog.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BoardService {
 
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
     private BoardRepository boardRepository;
-
-    @Autowired
     private ReplyRepository replyRepository;
+
+    public BoardService(BoardRepository boardRepository, ReplyRepository replyRepository){
+        this.boardRepository=boardRepository;
+        this.replyRepository=replyRepository;
+    }
 
 
     @Transactional
